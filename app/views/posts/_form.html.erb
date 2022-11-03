@@ -7,6 +7,10 @@
     <%= f.input :title %>
   </div>
 
+  <div class="form-inputs">
+    <%= f.input :body, as: :rich_text_area, label: 'Content', placeholder: 'Text goes here' %>
+  </div>
+
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
