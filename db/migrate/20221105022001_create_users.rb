@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :first_name
       t.string :last_name
       t.datetime :announcements_last_read_at
-      t.boolean :admin
+      t.boolean :admin, default: false
 
       t.timestamps
     end

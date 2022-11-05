@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_03_043445) do
+ActiveRecord::Schema.define(version: 2022_11_05_022104) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -50,12 +50,67 @@ ActiveRecord::Schema.define(version: 2022_11_03_043445) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "announcements", force: :cascade do |t|
+    t.datetime "published_at"
+    t.string "announcement_type"
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug"
+    t.string "sluggable_type", null: false
+    t.integer "sluggable_id", null: false
+    t.string "scope"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "recipient_id"
+    t.bigint "actor_id"
+    t.datetime "read_at"
+    t.string "notifiable_type", null: false
+    t.integer "notifiable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "services", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "provider"
+    t.string "uid"
+    t.string "access_token"
+    t.string "access_token_secret"
+    t.string "refresh_token"
+    t.datetime "expires_at"
+    t.text "auth"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_services_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "announcements_last_read_at"
+    t.boolean "admin", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "services", "users"
 end
