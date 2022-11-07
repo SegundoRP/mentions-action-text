@@ -10,10 +10,23 @@ export default class extends Controller {
     this.initializeTribute()
   }
 
+  disconnect() {
+    this.tribute.detach(this.fieldTarget)
+  }
+
   initializeTribute() {
     this.tribute = new Tribute({
       allowSpaces: true,
-      lookup: 'name'
+      lookup: 'name',
+      values: this.fetchUsers
     })
+    this.tribute.attach(this.fieldTarget)
+  }
+
+  fetchUsers(text, callback) {
+    fetch(`/mentions.json?query=${text}`)
+      .then(response => response.json())
+      .then(users => callback(users))
+      .catch(error => callback([]))
   }
 }
