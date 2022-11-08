@@ -1,55 +1,55 @@
 
-<%# <%= simple_form_for(@post) do |f| %>
- <%#  <%= f.error_notification %>
- <%#  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%= simple_form_for(@post) do |f| %>
+ <%= f.error_notification %>
+ <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
- <%# <div class="form-inputs">
-  <%#   <%= f.input :title %>
-  <%# </div>
+ <div class="form-inputs">
+  <%= f.input :title %>
+  </div>
 
-  <%# <div class="form-inputs">
-    <%= f.input :body, as: :rich_text_area, label: 'Content', placeholder: 'Text goes here', data: { controller: "mentions", target: "mentions.field" } %>
-  <%# </div>
+  <div class="form-inputs">
+    <%= f.input :body, as: :rich_text_area, label: 'Content', placeholder: 'Text goes here', input_html: { data: { controller: "mentions", target: "mentions.field" } } %>
+  </div>
 
   <div class="form-actions">
     <%= f.button :submit %>
-  <%# </div>
-<% end %> %>
+  </div>
+<% end %>
 
-<%= form_with(model: post, local: true) do |form| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<%# <%= form_with(model: post, local: true) do |form| %>
+ <%# <% if post.errors.any? %>
+   <%# <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> <%#prohibited this post from being saved:</h2>
 
-      <ul>
+     <%# <ul>
       <% post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <%#<li><%= message %><%#</li>
+     <%# <% end %>
+     <%# </ul>
     </div>
   <% end %>
 
-  <div class="form-group">
+  <%#<div class="form-group">
     <%= form.label :title %>
-    <%= form.text_field :title, class: 'form-control' %>
-  </div>
+  <%#  <%= form.text_field :title, class: 'form-control' %>
+  <%#</div>
 
   <div class="form-group">
     <%= form.label :body %>
-    <%= form.rich_text_area :body, class: 'form-control', data: { controller: "mentions", target: "mentions.field" } %>
-  </div>
+   <%# <%= form.rich_text_area :body, class: 'form-control', data: { controller: "mentions", target: "mentions.field" } %>
+  <%#</div>
 
   <div class="form-group">
     <% if post.persisted? %>
-      <div class="float-right">
+     <%# <div class="float-right">
         <%= link_to 'Destroy', post, method: :delete, class: "text-danger", data: { confirm: 'Are you sure?' } %>
-      </div>
-    <% end %>
-    <%= form.submit class: 'btn btn-primary' %>
-    <% if post.persisted? %>
-      <%= link_to "Cancel", post, class: "btn btn-link" %>
-    <% else %>
-      <%= link_to "Cancel", posts_path, class: "btn btn-link" %>
-    <% end %>
-  </div>
+     <%# </div>
+   <%# <% end %>
+    <%#<%= form.submit class: 'btn btn-primary' %>
+    <%#<% if post.persisted? %>
+    <%#  <%= link_to "Cancel", post, class: "btn btn-link" %>
+    <%#<% else %>
+     <%# <%= link_to "Cancel", posts_path, class: "btn btn-link" %>
+    <%#<% end %>
+  <%#</div>
 <% end %>
