@@ -44,7 +44,19 @@ export default class extends Controller {
 
   _pasteHtml(html, startPos, endPos) {
     let position = this.editor.getPosition()
-    this.editor.setSelectedRange([position - endPos, position])
+    // this.editor.setSelectedRange([position - endPos, position])  code original
+    this.editor.setSelectedRange([position - endPos + startPos, position + 1])
+    // code modified to works fine
     this.editor.deleteInDirection("backward")
   }
+
+  // another way
+  // _pasteHtml(html, startPos, endPos) {
+  //   let position = this.editor.getPosition()
+  //   let tributeLength = endPos - startPos
+  //   let trixStartPos = position - tributeLength
+  //   let trixEndPos = position
+  //   this.editor.setSelectedRange([trixStartPos, trixEndPos])
+  //   this.editor.deleteInDirection(“backward”)
+  // }
 }
