@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   def send_notifications
     users = user_mentions
     users.each do |user|
-      PostMailer.user_mention(user).deliver_now
+      PostMailer.user_mention(self, user).deliver_now
     end
   end
 
