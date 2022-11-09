@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   has_rich_text :body
 
+  after_create :send_notifications
+
   def send_notifications
     users = user_mentions
     users.each do |user|
