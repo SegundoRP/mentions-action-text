@@ -21,3 +21,7 @@ namespace :action_text do
     end
   end
 end
+
+
+# in application.rb change to rails 7
+# run in console rails action_text:refresh_embeds
